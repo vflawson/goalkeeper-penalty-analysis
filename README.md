@@ -48,13 +48,13 @@ Interestingly, only the overall FIFA rating was found to be statistically signif
 
 Finally, let’s see if there are any non-linear patterns in our FIFA goalkeeper ratings that a machine learning model can pick out. For this test, I used a simple random forest model (100 estimators without any parameter tuning) to see how well the model could predict if a penalty kick would be saved or not based on the six FIFA rating variables in our dataset. 
 
-<img width="2945" height="694" alt="random forest results" src="https://github.com/user-attachments/assets/030454d2-522d-4066-bb6a-b81ff4501dfd" />
+<img width="2945" height="694" alt="random forest results" src="https://github.com/user-attachments/assets/6cb0af4d-b739-4336-bcbd-145be36d74b4" />
 
 The results of the model indicate a fairly poor predictive performance. Essentially, the model predicted that every penalty kick would be successfully scored (class 0), which resulted in a high F-1 score for that class. However, the model greatly struggled to actually predict our target class, a penalty being saved. This issue is common when training models on imbalanced datasets in binary classification problems. The model will often default to the majority class. 
 
 We can improve the model performance by applying a statistical method known as SMOTE (synthetic minority oversampling technique) to the training data, which creates synthetic interpolated samples of the target class for the random forest model. That way, the model will have more examples of when a penalty is saved and can learn the patterns that predict this class. Additionally, I used class weighting in the model to compensate for the class imbalance, giving more importance to the minority class (a penalty being saved) during training.
 
-<img width="2945" height="694" alt="SMOTE random forest model" src="https://github.com/user-attachments/assets/d1603de1-8356-4428-a0e1-1c8a17be8def" />
+<img width="2945" height="694" alt="SMOTE random forest model" src="https://github.com/user-attachments/assets/d5afe34f-e4ab-4057-83d4-4505fa5688e1" />
 
 While we lost some overall accuracy in our model (a lower F-1 score in the 0 class), the model performed much better at predicting whether a penalty would be saved or not. 
 
